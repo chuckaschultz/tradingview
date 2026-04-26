@@ -1,6 +1,6 @@
 # Trading Dashboard — Plan Document
 
-_Last updated after Round 7 of requirements gathering. All open questions resolved._
+_Last updated after Round 8 of requirements gathering. All decisions locked._
 
 ---
 
@@ -43,7 +43,7 @@ A personal trading dashboard ("My Tradervue") built with **React + Tailwind CSS*
 
 - **Theme:** Dark, clean, minimal — TradingView / Tradervue aesthetic
 - **P&L colors:** Green (positive), Red (negative)
-- **Accent color:** Electric blue
+- **Accent color:** Bright green (matches TradingView / reference dashboard aesthetic)
 - **Navigation:** Left sidebar with icons + labels
 - **Default landing page:** Dashboard / summary home screen (shows yesterday's P&L, quick-add buttons, today's date)
 - **Font:** Modern sans-serif (Inter or similar)
@@ -55,12 +55,13 @@ A personal trading dashboard ("My Tradervue") built with **React + Tailwind CSS*
 ### Home (Dashboard)
 
 Landing page on every open. Shows:
-- Today's date and market day count
-- Yesterday's P&L summary card
-- This week's running P&L
-- Quick-add button for a new trade
-- Quick-add button for a new opp
-- Link to today's pre-market notes (with a "not yet filled in" indicator)
+- Personalized greeting ("Good morning, [Name]") + today's date + motivational quote
+- Today's P&L card (top right)
+- Quick-add "+ Add Trade" button (prominent, top right area)
+- **Stats grid (row 1):** Total P&L · Total Trades (W/L split) · Win Rate · Profit Factor
+- **Stats grid (row 2):** Max Drawdown · Expectancy · Best Trade · Worst Trade
+- **Stats grid (row 3):** Streaks · Avg Win · Avg Loss
+- **Goal Progress section:** Daily / Weekly / Monthly / Yearly P&L targets with progress bars and edit buttons
 - Most recent 3 trades (mini preview)
 
 ---
@@ -193,7 +194,23 @@ One entry per trading day. Displayed as a card with edit capability.
 
 ---
 
-### 6. Weekly / Monthly Review
+### 6. Calendar
+
+**Purpose:** Visual month/week/year view of trading performance — mirrors the reference image.
+
+**Features:**
+- Year / Month / Week toggle
+- Monthly calendar grid — each day cell shows:
+  - Daily net P&L (green if positive, red if negative)
+  - Number of trades
+  - Cell background color-coded by P&L magnitude
+- Summary bar above calendar: Net P&L · Total Trades · Win Rate for the selected period
+- Click a day to drill into that day's trade log
+- Navigate months with prev/next arrows
+
+---
+
+### 7. Weekly / Monthly Review
 
 **Purpose:** Auto-aggregated summaries by week and month.
 
@@ -231,22 +248,23 @@ One entry per trading day. Displayed as a card with edit capability.
 
 ## Build Order
 
-Steps are sequential. Build does not start until user reviews this plan.
+Steps are sequential. Build does not start until user gives the go-ahead.
 
 | # | Step | Notes |
 |---|---|---|
 | 1 | Project scaffold | Vite + React + Tailwind, folder structure |
 | 2 | Google Sheets API layer | Service account setup, read/write helpers |
-| 3 | Navigation shell + dark theme | Left sidebar, routing, electric blue accent |
-| 4 | Home / Dashboard screen | Summary cards, quick-add buttons |
+| 3 | Navigation shell + dark theme | Left sidebar, routing, green accent |
+| 4 | Home / Dashboard screen | Greeting, stats grid, goal progress, quick-add |
 | 5 | Daily Trade Log tab | Form, table, P&L calc, color coding |
 | 6 | Performance / P&L tab | Metrics, equity curve chart |
-| 7 | Best Opps tab + Watchlist | Watchlist management, opp logging |
-| 8 | Pre-Market Bias tab | Daily planning form |
-| 9 | Patterns / Playbook tab | Pattern catalog, Drive image links, auto-stats |
-| 10 | Weekly / Monthly Review tab | Auto-aggregation, period selector |
-| 11 | TradingView chart embeds | Large + mini charts across tabs |
-| 12 | Polish & review | Spacing, responsiveness, edge cases |
+| 7 | Calendar tab | Month grid, day drill-down, color-coded P&L cells |
+| 8 | Best Opps tab + Watchlist | Watchlist management, opp logging |
+| 9 | Pre-Market Bias tab | Daily planning form |
+| 10 | Patterns / Playbook tab | Pattern catalog, Drive image links, auto-stats |
+| 11 | Weekly / Monthly Review tab | Auto-aggregation, period selector |
+| 12 | TradingView chart embeds | Large + mini charts across tabs |
+| 13 | Polish & review | Spacing, responsiveness, edge cases |
 
 ---
 
@@ -261,10 +279,12 @@ Steps are sequential. Build does not start until user reviews this plan.
 | Auth | None — single machine |
 | Navigation | Left sidebar |
 | Landing page | Home / dashboard summary screen |
-| Accent color | Electric blue |
+| Accent color | Bright green (like reference) |
 | R-multiple tracking | Skipped — no stop price field |
 | Pattern images | Google Drive links |
 | TradingView charts | Large + mini, both on Trade Log and Best Opps |
 | Best Opps style | Watchlist-based, 6–10 stocks |
 | Playbook pre-loads | 5 Value Area / BB patterns from PineScript strategy |
-| Extra tabs | Weekly/Monthly Review + Pre-Market Bias |
+| Extra tabs | Calendar + Weekly/Monthly Review + Pre-Market Bias |
+| Goal tracking | Daily/Weekly/Monthly/Yearly P&L targets with progress bars |
+| Fees tracking | Skipped — P&L entered net of fees |
