@@ -55,7 +55,7 @@ A personal trading dashboard ("My Tradervue") built with **React + Tailwind CSS*
 ### Home (Dashboard)
 
 Landing page on every open. Shows:
-- Personalized greeting ("Good morning, [Name]") + today's date + motivational quote
+- Personalized greeting ("Good morning, Chuck") + today's date + motivational quote
 - Today's P&L card (top right)
 - Quick-add "+ Add Trade" button (prominent, top right area)
 - **Stats grid (row 1):** Total P&L · Total Trades (W/L split) · Win Rate · Profit Factor
